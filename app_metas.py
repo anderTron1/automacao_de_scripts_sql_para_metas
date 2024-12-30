@@ -145,7 +145,7 @@ def main():
             elif values['-PAPH-'] != '' \
             and values['-DATE-INITIAL-'] !=  '' and values['-DATE-FINAL-'] !=  '':
                 window['-BTN-TO-GENERATE-'].update(disabled=False)
-            elif event == '-BTN-TO-GERENATE-MODEL-EXCELL-':
+            #elif event == '-BTN-TO-GERENATE-MODEL-EXCELL-':
 
     window.close()
 
