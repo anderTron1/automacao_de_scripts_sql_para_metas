@@ -74,7 +74,53 @@ class GenerateGoals:
         result = '\nProcesso finalizado...'
         callback(result)
 
-# def generate_model_excell(path):
+def generate_model_excell(path):
+    data = {
+    'CODMETA': [4],
+    'DTREF': ['01/01/2024'],
+    'CODPROD': [123434],
+    'CODGRUPOPROD': [0],
+    'CODLOCAL': [0],
+    'CODPROJ': [0],
+    'CODCENCUS': [0],
+    'CODNAT': [0],
+    'CODREG': [0],
+    'CODGER': [0],
+    'CODVEND': [54],
+    'CODPARC': [123123],
+    'CODUF': [0],
+    'CODCID': [0],
+    'CODPAIS': [0],
+    'CODTIPPARC': [0],
+    'QTDPREV': [550],
+    'TOTALAUTINV': [85.65],
+    'PREVDESP': [0],
+    'QTDREAL': [0],
+    'REALREC': [0],
+    'REALDESP': [0],
+    'PERCENTUAL': [None],
+    'PREVREC': [47107.5],
+    'SUPLEMENTODESP': [0],
+    'ANTECIPDESP': [0],
+    'TRANSFDESP': [0],
+    'TRANSFSALDODESP': [0],
+    'REDUCAODESP': [0],
+    'COMPROMISSODESP': [0],
+    'ANALITICO': ['S'],
+    'TIPOMSG': ['Z'],
+    'PERCAVISO': [0],
+    'DIA': [0],
+    'SEMANAMES': [0],
+    'CODEMP': [0],
+    'TIPVENDA': [1],
+    'PERCCOMISSPARC_NTL': [1]
+    }
+
+    # Criar o DataFrame
+    df = pd.DataFrame(data)
+
+    # Salvar como CSV
+    df.to_csv(path, index=False, sep=';')
 
 
 #gerar = GerarMetas('metas/META SANKYA 2024.csv')
@@ -145,8 +191,15 @@ def main():
             elif values['-PAPH-'] != '' \
             and values['-DATE-INITIAL-'] !=  '' and values['-DATE-FINAL-'] !=  '':
                 window['-BTN-TO-GENERATE-'].update(disabled=False)
-            #elif event == '-BTN-TO-GERENATE-MODEL-EXCELL-':
+            if event == '-BTN-TO-GERENATE-MODEL-EXCELL-':
+                file_path = sg.popup_get_file(
+                    "Salvar como",
+                    save_as=True,
+                    file_types=(("css", "*.css"), ("All Files", "*.*"))
+                )
 
+                if os.path.exists(os.path.dirname(file_path)):
+                    generate_model_excell(file_path)
     window.close()
 
 if __name__ == '__main__':
